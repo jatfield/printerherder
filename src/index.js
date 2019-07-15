@@ -6,10 +6,11 @@ paragraph.innerHTML = 'blaah';
 document.body.appendChild(paragraph);
 let getButton = document.createElement("button");
 paragraph.innerHTML = 'GIT';
+getButton.innerHTML = 'GIT!';
 document.body.appendChild(getButton);
 
 getButton.onclick = () => {
-	emit('state-request', (response) => {
+	socket.emit('state-request', (response) => {
 	  console.log(response)
 	});
 };
