@@ -11,6 +11,6 @@ document.body.appendChild(getButton);
 
 getButton.onclick = () => {
 	socket.emit('state-request', (response) => {
-	  console.log(response)
+	  paragraph.innerHTML = response;
 	});
 };
