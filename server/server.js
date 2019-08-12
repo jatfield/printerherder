@@ -7,7 +7,6 @@ const io = require('socket.io')(http);
 const port = 3000;
 const db = require('../store/db');
 const ObjectId = require('mongodb').ObjectID;
-
 const {getState} = require('../query/get-state.js');
 const getPrinter = () => {
   const Printer = require('../store/models/printers.js');

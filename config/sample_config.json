@@ -1,0 +1,9 @@
+{
+  "mongo": {
+    "username": "herder",
+    "password": "herderpass",
+    "hostname": "127.0.0.1",
+    "port": "27107",
+    "db": "local"
+  }
+}
