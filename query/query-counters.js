@@ -25,7 +25,7 @@ const queryCounters = async () => {
   const printers = await Printer.find({});
   let queries = [];
   printers.forEach((printer) => {
-  queries.push(getOids(printer));
+    queries.push(getOids(printer));
   });
   return new Promise((resolve, reject) => {
     Promise.all(queries).then((results) => {
