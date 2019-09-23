@@ -8,10 +8,11 @@ const port = 3000;
 const db = require('../store/db');
 const ObjectId = require('mongodb').ObjectID;
 const {getState} = require('../query/get-state.js');
+const {queryCounters} = require('../query/query-counters.js');
 const getPrinter = () => {
   const Printer = require('../store/models/printers.js');
   return new Promise((resolve, reject) => {
-    Printer.findById(new ObjectId("5d4c6ae3f41fdc34776a60e6")).exec((error, printerDocument) => {
+    Printer.findById(new ObjectId("5d6629c99d0b53a77ea96014")).exec((error, printerDocument) => {
       if (error) {
         reject(error);
       } else {
@@ -21,7 +22,10 @@ const getPrinter = () => {
     });
   });
 }
-
+setInterval(async () => {
+  const counters = await queryCounters();
+  console.log(counters);
+}, 5000);
 
 app.get('/', (req, res) => {
   res.send('Hello world!');
