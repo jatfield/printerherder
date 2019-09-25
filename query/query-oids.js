@@ -3,17 +3,18 @@
 const snmp = require('net-snmp');
 const Printer = require('../store/models/printers.js');
 
-const getCount = (printer) => {
+const getOids = (printer) => {
   const session = snmp.createSession(printer.ip);
+  let results = [];
   return new Promise((resolve, reject) => {
-    session.get(['1.3.6.1.2.1.43.10.2.1.4.1.1'], (error, varbinds) => {
+    session.get(['1.3.6.1.2.1.25.3.2.1.5.1'], (error, varbinds) => {
       if (error) {
         reject(error);
       } else {
         for (var i = 0; i < varbinds.length; i++) {
-          printer.bwCounts.push({value: varbinds[i].value, queryTime: Date.now()});
+          results.push(`${printer.id}: ${varbinds[i].oid}: ${varbinds[i].value}`);
         }
-        resolve(printer);
+        resolve(results);
       }
       session.close();
     });
@@ -22,12 +23,14 @@ const getCount = (printer) => {
  
 const queryCounters = async () => {
   const printers = await Printer.find({});
-  for (let index = 0; index < printers.length; index ++) {
-    await getCount(printers[index]);
-    await printers[index].save();
-  };
+  let queries = [];
+  printers.forEach((printer) => {
+    queries.push(getOids(printer));
+  });
   return new Promise((resolve, reject) => {
-    resolve(printers);
+    Promise.all(queries).then((results) => {
+      resolve(results);
+    });
   });
 }
 
