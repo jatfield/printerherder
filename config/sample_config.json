@@ -3,7 +3,8 @@
     "username": "herder",
     "password": "herderpass",
     "hostname": "127.0.0.1",
-    "port": "27107",
+    "port": "27017",
+    "authDb": "admin",
     "db": "local"
   }
 }
