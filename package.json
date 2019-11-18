@@ -29,5 +29,9 @@
     "nconf": "^0.10.0",
     "net-snmp": "^1.2.4",
     "socket.io": "^2.3.0"
+  },
+  "jshintConfig": {
+    "esversion": "8",
+    "node": "true"
   }
 }

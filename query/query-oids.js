@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const snmp = require('net-snmp');
 const Printer = require('../store/models/printers.js');
@@ -19,8 +19,8 @@ const getOids = (printer) => {
       session.close();
     });
   });
-}
- 
+};
+
 const queryCounters = async () => {
   const printers = await Printer.find({});
   let queries = [];
@@ -32,6 +32,6 @@ const queryCounters = async () => {
       resolve(results);
     });
   });
-}
+};
 
 module.exports = {queryCounters};

@@ -3,7 +3,9 @@
 //walker script to explore MIB
 const snmp = require('net-snmp');
 
-const ip = process.argv[2];
+const ip = process.argv[2].split(":")[0];
+const port = process.argv[2].split(":")[1] || 161;
+console.log(port);
 const neededValue = process.argv[3];
 
 var oid = "1.3.6.1.2.1.2.2";
@@ -30,5 +32,5 @@ var maxRepetitions = 20;
 
 // The maxRepetitions argument is optional, and will be ignored unless using
 // SNMP verison 2c
-const session = snmp.createSession(ip);
+const session = snmp.createSession(ip, "public", {port});
 session.walk (oid, maxRepetitions, feedCb, doneCb);
