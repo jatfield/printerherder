@@ -28,7 +28,7 @@
     "mongoose": "^5.7.8",
     "nconf": "^0.10.0",
     "net-snmp": "^1.2.4",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.4.0"
   },
   "jshintConfig": {
     "esversion": "8",
